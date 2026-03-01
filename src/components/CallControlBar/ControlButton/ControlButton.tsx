@@ -1,4 +1,5 @@
 import { ChevronUp } from "lucide-react";
+import { motion } from "motion/react";
 import type { ComponentType } from "react";
 import styles from "./ControlButton.module.css";
 
@@ -40,12 +41,28 @@ export function ControlButton({
           data-tooltip={title}
           onClick={onToggle}
         >
-          <span
-            className={[styles.iconWrapper, !isActive ? styles.inactive : ""]
-              .filter(Boolean)
-              .join(" ")}
-          >
+          <span className={styles.iconWrapper}>
             <Icon size={24} />
+            <svg
+              className={styles.strikethrough}
+              viewBox="0 0 30 30"
+              fill="none"
+              aria-hidden="true"
+            >
+              <motion.path
+                d="M 30 0 L 0 30"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="butt"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: isActive ? 0 : 1 }}
+                transition={
+                  isActive
+                    ? { duration: 0 }
+                    : { type: "spring", stiffness: 500, damping: 35 }
+                }
+              />
+            </svg>
           </span>
         </button>
         <button
