@@ -1,0 +1,70 @@
+.button {
+  display: flex;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.button--square {
+  width: 48px;
+  padding: 12px;
+  aspect-ratio: 1 / 1;
+  background: var(--incall-controlbar-cells-default, rgba(255, 255, 255, 0.08));
+}
+
+.button--negative {
+  background: var(--incall-controlbar-cells-negative, #d12525);
+}
+
+.group {
+  display: flex;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--incall-controlbar-cells-default, rgba(255, 255, 255, 0.08));
+}
+
+.groupMain {
+  display: flex;
+  padding: 12px 1px 12px 12px;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: white;
+  border-radius: 8px 0 0 8px;
+}
+
+.groupChevron {
+  display: flex;
+  padding: 12px 8px 12px 1px;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: white;
+  border-radius: 0 8px 8px 0;
+}
+
+.iconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inactive::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(
+    135deg,
+    transparent calc(50% - 1.5px),
+    currentColor calc(50% - 1.5px),
+    currentColor calc(50% + 1.5px),
+    transparent calc(50% + 1.5px)
+  );
+}

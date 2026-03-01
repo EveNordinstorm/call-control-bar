@@ -1,16 +1,14 @@
-.wrapper {
-  display: inline-grid;
-  gap: 8px;
-}
-
-.bar {
-  display: inline-flex;
-  padding: 8px;
+.settingsMenu {
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  padding: 8px;
   border-radius: var(--Radius-Radius-16, 16px);
-  border: 1px solid var(--incall-controlbar-base-border, rgba(255, 255, 255, 0.12));
+  border: 1px solid
+    var(--incall-controlbar-base-border, rgba(255, 255, 255, 0.12));
   background: var(--incall-controlbar-base-background, rgba(0, 0, 0, 0.7));
   backdrop-filter: blur(50px);
+  color: white;
+  font-size: 14px;
+  white-space: nowrap;
 }

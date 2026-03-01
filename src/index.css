@@ -1,7 +1,11 @@
+* {
+  font-family: "Suisse Int'l Book", Arial, sans-serif;
+}
+
 :root {
   --Radius-Radius-16: 16px;
   --incall-controlbar-base-border: rgba(255, 255, 255, 0.12);
   --incall-controlbar-base-background: rgba(0, 0, 0, 0.7);
-  --incall-controlbar-cells-default: rgba(255, 255, 255, 0);
+  --incall-controlbar-cells-default: rgba(255, 255, 255, 0.08);
   --incall-controlbar-cells-negative: #d12525;
 }

@@ -1,0 +1,18 @@
+.inOutMenu {
+  padding: 4px;
+  border-radius: var(--Radius-Radius-16, 16px);
+  border: 1px solid var(--incall-controlbar-base-border, rgba(255, 255, 255, 0.12));
+  background: var(--incall-controlbar-base-background, rgba(0, 0, 0, 0.7));
+  backdrop-filter: blur(50px);
+  color: white;
+}
+
+.device {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 12px;
+}
