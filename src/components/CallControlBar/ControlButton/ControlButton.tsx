@@ -5,6 +5,8 @@ import styles from "./ControlButton.module.css";
 interface Props {
   icon: ComponentType<{ size?: number }>;
   label: string;
+  title?: string;
+  chevronTitle?: string;
   variant?: "default" | "negative";
   showChevron?: boolean;
   isActive?: boolean;
@@ -17,6 +19,8 @@ interface Props {
 export function ControlButton({
   icon: Icon,
   label,
+  title,
+  chevronTitle,
   variant = "default",
   showChevron = false,
   isActive = true,
@@ -33,6 +37,7 @@ export function ControlButton({
           className={styles.groupMain}
           aria-label={label}
           aria-pressed={!isActive}
+          data-tooltip={title}
           onClick={onToggle}
         >
           <span
@@ -48,6 +53,7 @@ export function ControlButton({
           className={styles.groupChevron}
           aria-label={`${label} — device settings`}
           aria-expanded={chevronOpen}
+          data-tooltip={chevronTitle}
           onClick={onChevronClick}
         >
           <ChevronUp size={16} />
@@ -65,6 +71,7 @@ export function ControlButton({
         .filter(Boolean)
         .join(" ")}
       aria-label={label}
+      data-tooltip={title}
       onClick={onClick}
     >
       <Icon size={24} />

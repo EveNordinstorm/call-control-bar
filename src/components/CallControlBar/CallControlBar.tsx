@@ -38,6 +38,8 @@ export function CallControlBar() {
         <ControlButton
           icon={Video}
           label="Toggle camera"
+          title={isCameraActive ? "Camera on" : "Camera off"}
+          chevronTitle="Camera options"
           showChevron
           isActive={isCameraActive}
           onToggle={() => setIsCameraActive((o) => !o)}
@@ -47,6 +49,8 @@ export function CallControlBar() {
         <ControlButton
           icon={Mic}
           label="Toggle microphone"
+          title={isMicActive ? "Mute mic" : "Unmute mic"}
+          chevronTitle="Mic options"
           showChevron
           isActive={isMicActive}
           onToggle={() => setIsMicActive((o) => !o)}
@@ -56,9 +60,10 @@ export function CallControlBar() {
         <ControlButton
           icon={Menu}
           label="Open settings"
+          title="Settings menu"
           onClick={() => toggle("settings")}
         />
-        <ControlButton icon={HangUpIcon} label="Leave call" variant="negative" />
+        <ControlButton icon={HangUpIcon} label="Leave call" title="End call" variant="negative" />
       </div>
     </div>
   );
