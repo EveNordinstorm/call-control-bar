@@ -51,7 +51,7 @@ export function CallControlBar() {
       {!hangingUp && openMenu === "mic" && <InputAndOutputMenu type="mic" />}
       {!hangingUp && openMenu === "settings" && <SettingsMenu />}
 
-      <div className={styles.bar}>
+      <div className={[styles.bar, hangingUp ? styles["bar--clipping"] : ""].filter(Boolean).join(" ")}>
         <motion.div
           initial={false}
           animate={hangingUp ? { x: 120, opacity: 0 } : { x: 0, opacity: 1 }}
