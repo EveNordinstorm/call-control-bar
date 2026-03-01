@@ -13,4 +13,12 @@
   border: 1px solid var(--incall-controlbar-base-border, rgba(255, 255, 255, 0.12));
   background: var(--incall-controlbar-base-background, rgba(0, 0, 0, 0.7));
   backdrop-filter: blur(50px);
+  position: relative;
+  overflow: hidden;
+}
+
+.hangUpWrapper {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
 }

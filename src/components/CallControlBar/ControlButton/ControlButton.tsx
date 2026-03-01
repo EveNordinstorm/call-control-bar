@@ -11,6 +11,7 @@ interface Props {
   variant?: "default" | "negative";
   showChevron?: boolean;
   isActive?: boolean;
+  iconRotate?: number;
   onToggle?: () => void;
   onChevronClick?: () => void;
   chevronOpen?: boolean;
@@ -25,6 +26,7 @@ export function ControlButton({
   variant = "default",
   showChevron = false,
   isActive = true,
+  iconRotate,
   onToggle,
   onChevronClick,
   chevronOpen = false,
@@ -91,7 +93,18 @@ export function ControlButton({
       data-tooltip={title}
       onClick={onClick}
     >
-      <Icon size={24} />
+      {iconRotate !== undefined ? (
+        <motion.span
+          style={{ display: "inline-flex" }}
+          initial={false}
+          animate={{ rotate: iconRotate }}
+          transition={{ type: "spring", stiffness: 350, damping: 25 }}
+        >
+          <Icon size={24} />
+        </motion.span>
+      ) : (
+        <Icon size={24} />
+      )}
     </button>
   );
 }

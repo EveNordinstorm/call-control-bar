@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import { Mic, Video, Menu } from "lucide-react";
 import { ControlButton } from "./ControlButton/ControlButton";
 import { InputAndOutputMenu } from "./InOutMenu/InOutMenu";
@@ -25,45 +26,91 @@ export function CallControlBar() {
   const [isCameraActive, setIsCameraActive] = useState(true);
   const [isMicActive, setIsMicActive] = useState(true);
   const [openMenu, setOpenMenu] = useState<OpenMenu>(null);
+  const [hangingUp, setHangingUp] = useState(false);
 
   const toggle = (menu: NonNullable<OpenMenu>) =>
     setOpenMenu((current) => (current === menu ? null : menu));
 
+  const handleHangUp = () => {
+    if (hangingUp) return;
+    setOpenMenu(null);
+    setHangingUp(true);
+    setTimeout(() => setHangingUp(false), 1100);
+  };
+
+  const buttonTransition = (delay: number) =>
+    hangingUp
+      ? { duration: 0.25, delay, ease: "easeIn" as const }
+      : { duration: 0 };
+
   return (
     <div className={styles.wrapper}>
-      {openMenu === "camera" && <InputAndOutputMenu type="camera" />}
-      {openMenu === "mic" && <InputAndOutputMenu type="mic" />}
-      {openMenu === "settings" && <SettingsMenu />}
+      {!hangingUp && openMenu === "camera" && (
+        <InputAndOutputMenu type="camera" />
+      )}
+      {!hangingUp && openMenu === "mic" && <InputAndOutputMenu type="mic" />}
+      {!hangingUp && openMenu === "settings" && <SettingsMenu />}
+
       <div className={styles.bar}>
-        <ControlButton
-          icon={Video}
-          label="Toggle camera"
-          title={isCameraActive ? "Camera on" : "Camera off"}
-          chevronTitle="Camera options"
-          showChevron
-          isActive={isCameraActive}
-          onToggle={() => setIsCameraActive((o) => !o)}
-          onChevronClick={() => toggle("camera")}
-          chevronOpen={openMenu === "camera"}
-        />
-        <ControlButton
-          icon={Mic}
-          label="Toggle microphone"
-          title={isMicActive ? "Mute mic" : "Unmute mic"}
-          chevronTitle="Mic options"
-          showChevron
-          isActive={isMicActive}
-          onToggle={() => setIsMicActive((o) => !o)}
-          onChevronClick={() => toggle("mic")}
-          chevronOpen={openMenu === "mic"}
-        />
-        <ControlButton
-          icon={Menu}
-          label="Open settings"
-          title="Settings menu"
-          onClick={() => toggle("settings")}
-        />
-        <ControlButton icon={HangUpIcon} label="Leave call" title="End call" variant="negative" />
+        <motion.div
+          initial={false}
+          animate={hangingUp ? { x: 120, opacity: 0 } : { x: 0, opacity: 1 }}
+          transition={buttonTransition(0)}
+        >
+          <ControlButton
+            icon={Video}
+            label="Toggle camera"
+            title={isCameraActive ? "Camera on" : "Camera off"}
+            chevronTitle="Camera options"
+            showChevron
+            isActive={isCameraActive}
+            onToggle={() => setIsCameraActive((o) => !o)}
+            onChevronClick={() => toggle("camera")}
+            chevronOpen={openMenu === "camera"}
+          />
+        </motion.div>
+
+        <motion.div
+          initial={false}
+          animate={hangingUp ? { x: 120, opacity: 0 } : { x: 0, opacity: 1 }}
+          transition={buttonTransition(0.07)}
+        >
+          <ControlButton
+            icon={Mic}
+            label="Toggle microphone"
+            title={isMicActive ? "Mute mic" : "Unmute mic"}
+            chevronTitle="Mic options"
+            showChevron
+            isActive={isMicActive}
+            onToggle={() => setIsMicActive((o) => !o)}
+            onChevronClick={() => toggle("mic")}
+            chevronOpen={openMenu === "mic"}
+          />
+        </motion.div>
+
+        <motion.div
+          initial={false}
+          animate={hangingUp ? { x: 120, opacity: 0 } : { x: 0, opacity: 1 }}
+          transition={buttonTransition(0.14)}
+        >
+          <ControlButton
+            icon={Menu}
+            label="Open settings"
+            title="Settings menu"
+            onClick={() => toggle("settings")}
+          />
+        </motion.div>
+
+        <div className={styles.hangUpWrapper}>
+          <ControlButton
+            icon={HangUpIcon}
+            label="Leave call"
+            title="End call"
+            variant="negative"
+            iconRotate={hangingUp ? 0 : -45}
+            onClick={handleHangUp}
+          />
+        </div>
       </div>
     </div>
   );
